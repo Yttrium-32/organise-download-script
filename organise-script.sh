@@ -2,7 +2,6 @@
 
 download_folder=~/Downloads/
 
-directories=(Compressed Documents Images Programs)
 declare -A file_extensions=(
     [Compressed]="zip|tar|gz|bz2|xz|lz|lzma|zst|7z|rar|tgz|tbz|txz"
     [Documents]="pdf|djvu|epub|txt|md|rst|doc|docx|odt|rtf|xls|xlsx|ods|csv|ppt|pptx|odp|json|yaml|yml|xml|toml"
@@ -18,7 +17,7 @@ do
         extension="${entry##*.}"
         lower_extension=${extension,,}
 
-        for dir in "${directories[@]}"
+        for dir in "${!file_extensions[@]}"
         do
             extensions_list=${file_extensions[$dir]}
 
