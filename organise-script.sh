@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+log() {
+    printf '[%s] %s\n' \
+           "$(date '+%Y-%m-%d %H:%M:%S')" \
+           "$*"
+}
+
 download_folder=~/Downloads/
 
 declare -A file_extensions=(
@@ -11,6 +17,8 @@ declare -A file_extensions=(
     [Programs]="appimage|run|sh|bin|elf|out|py|pl|rb|jar|exe|apk|msi|deb|rpm"
 )
 
+sorted_items=0
+log "Starting sorting..."
 for entry in "$download_folder"*
 do
     if [[ -f $entry ]]; then
@@ -23,10 +31,13 @@ do
 
             if [[ "$lower_extension" =~ ^($extensions_list)$ ]]; then
                 mv "$entry" "$HOME/Downloads/$dir"
-                echo "Moved `$entry` to `$HOME/Downloads/$dir`"
+                log "Sorted `$entry` to `$HOME/Downloads/$dir`"
+                ((sorted_items++))
             fi
         done
         echo
     fi
 done
 
+log "Finished sorting"
+log "Sorted $sorted_items items"
