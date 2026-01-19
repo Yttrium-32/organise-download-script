@@ -39,5 +39,5 @@ do
     fi
 done
 
-log "Finished sorting"
-log "Sorted $sorted_items items"
+log "Finished sorting $sorted_items items"
+echo
