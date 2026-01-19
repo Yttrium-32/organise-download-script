@@ -24,18 +24,24 @@ do
     if [[ -f $entry ]]; then
         extension="${entry##*.}"
         lower_extension=${extension,,}
+        is_unknown=true
 
         for dir in "${!file_extensions[@]}"
         do
             extensions_list=${file_extensions[$dir]}
 
             if [[ "$lower_extension" =~ ^($extensions_list)$ ]]; then
+                is_unknown=false
                 mv "$entry" "$HOME/Downloads/$dir"
                 log "Sorted `$entry` to `$HOME/Downloads/$dir`"
                 ((sorted_items++))
             fi
         done
-        echo
+
+        if [[ "$is_unknown" = true ]]; then
+            log "The extension of $entry is not known."
+            log "Hint: Add it's extension to a new or already known dir in the script"
+        fi
     fi
 done
 
