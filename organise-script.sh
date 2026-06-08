@@ -40,7 +40,7 @@ do
 
         if [[ "$is_unknown" = true ]]; then
             log "The extension of $entry is not known."
-            log "Hint: Add it's extension to a new or already known dir in the script"
+            log "Hint: Add the extension to a new or already known dir in the script"
         fi
     fi
 done
